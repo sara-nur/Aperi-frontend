@@ -1,7 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aperi_frontend">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
    <application
-        android:label="aperi_frontend"
+        android:label="a"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

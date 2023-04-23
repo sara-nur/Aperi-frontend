@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "aperi_frontend" "\0"
+            VALUE "FileDescription", "a" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "aperi_frontend" "\0"
+            VALUE "InternalName", "a" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "aperi_frontend.exe" "\0"
-            VALUE "ProductName", "aperi_frontend" "\0"
+            VALUE "OriginalFilename", "a.exe" "\0"
+            VALUE "ProductName", "a" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
