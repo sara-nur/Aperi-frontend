@@ -13,10 +13,33 @@ class _FingerPrintIDState extends State<FingerPrintID> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Finger Print ID'),
+        centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 229, 99, 90),
+              Color.fromARGB(255, 67, 144, 207),
+              Color.fromARGB(223, 183, 144, 54),
+            ],
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                'Scan your fingerprint to authenticate!',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
