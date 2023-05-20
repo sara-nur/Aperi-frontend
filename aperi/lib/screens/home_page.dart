@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:aperi/screens/face_id_screen.dart';
 import 'package:aperi/screens/fingerprint_id_screen.dart';
-import 'package:aperi/screens/code_id_screen.dart';
+import 'package:aperi/screens/email_address_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -103,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const CodeID()),
+                    MaterialPageRoute(builder: (context) => const Email()),
                   );
                 },
                 icon: const Icon(Icons.numbers),

@@ -1,8 +1,5 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
-import 'package:aperi/widgets/ButtonWidget.dart';
+import 'package:flutter/services.dart';
 
 class CodeID extends StatefulWidget {
   const CodeID({super.key});
@@ -12,47 +9,168 @@ class CodeID extends StatefulWidget {
 }
 
 class _CodeIDState extends State<CodeID> {
-  final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          '4-digit code',
+          '4-digit-code',
+          style: TextStyle(
+            fontSize: 20,
+          ),
         ),
         centerTitle: true,
       ),
       body: Container(
         decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color.fromARGB(255, 229, 99, 90),
-            Color.fromARGB(255, 67, 144, 207),
-            Color.fromARGB(223, 183, 144, 54),
-          ],
-        )),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 229, 99, 90),
+              Color.fromARGB(255, 67, 144, 207),
+              Color.fromARGB(223, 183, 144, 54),
+            ],
+          ),
+        ),
         child: Center(
           child: Form(
-            key: formKey,
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
+            child: SizedBox(
+              width: 270,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  EmailFieldWidget(controller: emailController),
-                  const SizedBox(
-                    height: 16,
+                  const Text(
+                    'Check your inbox, we sent you the code :)',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
-                  buildButton(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'Enter the 4 digit code',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 60.0,
+                        height: 60.0,
+                        child: TextFormField(
+                          onChanged: (value) {
+                            if (value.length == 1) {
+                              FocusScope.of(context).nextFocus();
+                            }
+                          },
+                          onSaved: (pin1) {},
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(1),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 60.0,
+                        height: 60.0,
+                        child: TextFormField(
+                          onChanged: (value) {
+                            if (value.length == 1) {
+                              FocusScope.of(context).nextFocus();
+                            }
+                          },
+                          onSaved: (pin2) {},
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(1),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 60.0,
+                        height: 60.0,
+                        child: TextFormField(
+                          onChanged: (value) {
+                            if (value.length == 1) {
+                              FocusScope.of(context).nextFocus();
+                            }
+                          },
+                          onSaved: (pin3) {},
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(1),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 60.0,
+                        height: 60.0,
+                        child: TextFormField(
+                          onChanged: (value) {
+                            if (value.length == 1) {
+                              FocusScope.of(context).nextFocus();
+                            }
+                          },
+                          onSaved: (pin4) {},
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(1),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -61,52 +179,4 @@ class _CodeIDState extends State<CodeID> {
       ),
     );
   }
-
-  Widget buildButton() => ButtonWidget(
-        text: 'SUBMIT',
-        onClicked: () {
-          final form = formKey.currentState!;
-
-          if (form.validate()) {
-            final email = emailController.text;
-
-            ScaffoldMessenger.of(context)
-              ..removeCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                content: Text('Your email is $email'),
-              ));
-          }
-        },
-      );
-}
-
-class EmailFieldWidget extends StatefulWidget {
-  final TextEditingController controller;
-
-  const EmailFieldWidget({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
-
-  @override
-  State<EmailFieldWidget> createState() => _EmailFieldWidgetState();
-}
-
-class _EmailFieldWidgetState extends State<EmailFieldWidget> {
-  @override
-  Widget build(BuildContext context) => TextFormField(
-        controller: widget.controller,
-        decoration: const InputDecoration(
-          hintText: 'Enter your email',
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-          ),
-          prefixIcon: Icon(Icons.email_outlined),
-        ),
-        keyboardType: TextInputType.emailAddress,
-        autofillHints: const [AutofillHints.email],
-        validator: (email) => email != null && !EmailValidator.validate(email)
-            ? 'Enter a valid email'
-            : null,
-      );
 }
