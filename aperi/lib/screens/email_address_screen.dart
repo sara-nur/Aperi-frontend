@@ -11,6 +11,7 @@ class Email extends StatefulWidget {
 }
 
 class _EmailState extends State<Email> {
+  String apiCode = "1234";
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
 
@@ -78,7 +79,7 @@ class _EmailState extends State<Email> {
 //TODO: fetch api
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const CodeID()),
+              MaterialPageRoute(builder: (context) => CodeID(apiCode: apiCode)),
             );
 
             ScaffoldMessenger.of(context)

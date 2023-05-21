@@ -1,14 +1,32 @@
+import 'package:aperi/screens/successful_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CodeID extends StatefulWidget {
-  const CodeID({super.key});
+  final String? apiCode;
+  CodeID({Key? key, required this.apiCode}) : super(key: key);
 
   @override
   State<CodeID> createState() => _CodeIDState();
 }
 
 class _CodeIDState extends State<CodeID> {
+  String displayMessage = "Enter the 4-digit code";
+  String localCode = "";
+  final TextEditingController pin1Controller = TextEditingController();
+  final TextEditingController pin2Controller = TextEditingController();
+  final TextEditingController pin3Controller = TextEditingController();
+  final TextEditingController pin4Controller = TextEditingController();
+
+  @override
+  void dispose() {
+    pin1Controller.dispose();
+    pin2Controller.dispose();
+    pin3Controller.dispose();
+    pin4Controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,10 +67,14 @@ class _CodeIDState extends State<CodeID> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Text(
-                    'Enter the 4 digit code',
+                  Text(
+                    displayMessage,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: displayMessage == "Enter the 4-digit code"
+                          ? Colors.white
+                          : Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
                     ),
                   ),
                   const SizedBox(
@@ -69,11 +91,12 @@ class _CodeIDState extends State<CodeID> {
                             if (value.length == 1) {
                               FocusScope.of(context).nextFocus();
                             }
+                            pin1Controller.text = value.toString();
                           },
                           onSaved: (pin1) {},
                           decoration: const InputDecoration(
                             filled: true,
-                            fillColor: Colors.white,
+                            fillColor: Color.fromARGB(255, 210, 198, 198),
                             border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
@@ -96,11 +119,12 @@ class _CodeIDState extends State<CodeID> {
                             if (value.length == 1) {
                               FocusScope.of(context).nextFocus();
                             }
+                            pin2Controller.text = value.toString();
                           },
                           onSaved: (pin2) {},
                           decoration: const InputDecoration(
                             filled: true,
-                            fillColor: Colors.white,
+                            fillColor: Color.fromARGB(255, 210, 198, 198),
                             border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
@@ -123,11 +147,12 @@ class _CodeIDState extends State<CodeID> {
                             if (value.length == 1) {
                               FocusScope.of(context).nextFocus();
                             }
+                            pin3Controller.text = value.toString();
                           },
                           onSaved: (pin3) {},
                           decoration: const InputDecoration(
                             filled: true,
-                            fillColor: Colors.white,
+                            fillColor: Color.fromARGB(255, 210, 198, 198),
                             border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
@@ -150,11 +175,12 @@ class _CodeIDState extends State<CodeID> {
                             if (value.length == 1) {
                               FocusScope.of(context).nextFocus();
                             }
+                            pin4Controller.text = value.toString();
                           },
                           onSaved: (pin4) {},
                           decoration: const InputDecoration(
                             filled: true,
-                            fillColor: Colors.white,
+                            fillColor: Color.fromARGB(255, 210, 198, 198),
                             border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
@@ -170,6 +196,42 @@ class _CodeIDState extends State<CodeID> {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      fixedSize: const Size(100, 30),
+                      backgroundColor: const Color.fromARGB(90, 234, 230, 240),
+                    ),
+                    onPressed: () {
+                      String concatenatedCode = pin1Controller.text +
+                          pin2Controller.text +
+                          pin3Controller.text +
+                          pin4Controller.text;
+                      setState(
+                        () {
+                          localCode = concatenatedCode;
+                        },
+                      );
+                      print(localCode);
+                      if (localCode == widget.apiCode) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SuccessfulAuth(),
+                          ),
+                        );
+                      } else {
+                        displayMessage = 'Code incorrect! Try again';
+                      }
+                    },
+                    child: const Text('Submit'),
                   ),
                 ],
               ),
