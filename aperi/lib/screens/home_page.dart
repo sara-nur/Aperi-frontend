@@ -103,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Email()),
+                    MaterialPageRoute(builder: (context) => Email()),
                   );
                 },
                 icon: const Icon(Icons.numbers),
