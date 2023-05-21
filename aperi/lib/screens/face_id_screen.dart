@@ -28,8 +28,8 @@ class _FaceIDState extends State<FaceID> {
             end: Alignment.bottomRight,
             colors: [
               Color.fromARGB(255, 229, 99, 90),
-              Color.fromARGB(255, 67, 144, 207),
-              Color.fromARGB(223, 183, 144, 54),
+              Color.fromARGB(255, 14, 131, 227),
+              Color.fromARGB(224, 197, 138, 212),
             ],
           ),
         ),
