@@ -1,3 +1,4 @@
+import 'package:aperi/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 class SuccessfulAuth extends StatefulWidget {
@@ -8,6 +9,21 @@ class SuccessfulAuth extends StatefulWidget {
 }
 
 class _SuccessfulAuthState extends State<SuccessfulAuth> {
+  @override
+  void initState() {
+    Future.delayed(
+      const Duration(seconds: 5),
+      () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +53,7 @@ class _SuccessfulAuthState extends State<SuccessfulAuth> {
           children: const [
             Text(
               'You have successfully authenticated! The doors will now open for you :)',
-            )
+            ),
           ],
         ),
       ),
