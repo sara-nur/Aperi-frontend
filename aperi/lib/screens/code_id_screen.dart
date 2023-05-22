@@ -1,10 +1,53 @@
 import 'package:aperi/screens/successful_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CodeID extends StatefulWidget {
-  final String? apiCode;
-  CodeID({Key? key, required this.apiCode}) : super(key: key);
+  String? apiCode;
+  String email;
+
+  CodeID({Key? key, required this.email, apiCode}) : super(key: key) {
+    email = email;
+
+    getEmailCode(email);
+  }
+
+  Future<dynamic> postCodeAuth() async {
+    final body = jsonEncode({'isAuthorized': true});
+    final headers = {
+      'accept': '*/*',
+      'Content-Type': 'application/json',
+    };
+
+    var response = await http.post(
+      Uri.parse(
+          'http://192.168.1.184:7004/api/code-auth'), //TODO: ssl certificate validation
+      headers: headers,
+      body: body,
+    );
+  }
+
+  Future<dynamic> getEmailCode(String email) async {
+    final body = jsonEncode({'email': email});
+
+    final headers = {
+      'accept': 'text/plain',
+      'Content-Type': 'application/json',
+    };
+    final response = await http.post(
+      Uri.parse(
+          'http://192.168.1.184:7004/api/get-code'), //TODO: ssl certificate validation
+      headers: headers,
+      body: body,
+    );
+    if (response.statusCode == 200) {
+      apiCode = jsonDecode(response.body)['oneTimeCode'];
+    } else {
+      throw Exception("Failed to fetch code!");
+    }
+  }
 
   @override
   State<CodeID> createState() => _CodeIDState();
@@ -219,8 +262,9 @@ class _CodeIDState extends State<CodeID> {
                           localCode = concatenatedCode;
                         },
                       );
-                      print(localCode);
+
                       if (localCode == widget.apiCode) {
+                        widget.postCodeAuth();
                         Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -2,26 +2,9 @@ import 'package:aperi/screens/code_id_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:aperi/widgets/ButtonWidget.dart';
-import 'package:http/http.dart' as http;
 
 class Email extends StatefulWidget {
-  String apiCode = "";
-
   Email({Key? key}) : super(key: key);
-
-  Future<dynamic> getEmailCode(String email) async {
-    dynamic body = {email: email};
-    final response = await http.post(
-      Uri.parse('https://192.168.1.184:7004/api/get-code'),
-      body: body,
-    );
-    if (response.statusCode == 200) {
-      apiCode = response.body;
-      print(apiCode);
-    } else {
-      throw Exception("Failed to fetch code!");
-    }
-  }
 
   @override
   State<Email> createState() => _EmailState();
@@ -92,11 +75,11 @@ class _EmailState extends State<Email> {
 
           if (form.validate()) {
             final email = emailController.text;
-            widget.getEmailCode(email);
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => CodeID(apiCode: widget.apiCode)),
+                builder: (context) => CodeID(email: email),
+              ),
             );
 
             ScaffoldMessenger.of(context)
