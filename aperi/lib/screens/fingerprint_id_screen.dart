@@ -1,13 +1,33 @@
+import 'package:aperi/screens/successful_auth_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:aperi/services/local_auth_custom.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
+import 'dart:convert';
 
 class FingerPrintID extends StatefulWidget {
-  const FingerPrintID({super.key});
+  FingerPrintID({super.key});
+
+  Future<dynamic> postFingerprintAuth() async {
+    final body = jsonEncode({'isAuthorized': true});
+    final headers = {
+      'accept': '*/*',
+      'Content-Type': 'application/json',
+    };
+
+    var response = await http.post(
+      Uri.parse('http://192.168.1.82:7004/api/fingerprint-auth'),
+      headers: headers,
+      body: body,
+    );
+  }
 
   @override
   State<FingerPrintID> createState() => _FingerPrintIDState();
 }
 
 class _FingerPrintIDState extends State<FingerPrintID> {
+  bool authenticate = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,14 +50,27 @@ class _FingerPrintIDState extends State<FingerPrintID> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
-                'Scan your fingerprint to authenticate!',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                ),
-              )
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  var authenticate =
+                      await LocalAuthCustom.authenticateFingerprint();
+                  setState(() {
+                    authenticate = authenticate;
+                  });
+                  if (authenticate == true) {
+                    widget.postFingerprintAuth();
+                    // ignore: use_build_context_synchronously
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SuccessfulAuth(),
+                      ),
+                    );
+                  }
+                },
+                child: const Text('Scan your fingerprint'),
+              ),
             ],
           ),
         ),

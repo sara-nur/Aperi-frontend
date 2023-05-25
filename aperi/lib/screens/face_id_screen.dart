@@ -33,10 +33,10 @@ class _FaceIDState extends State<FaceID> {
             ],
           ),
         ),
-        child: Center(
+        child: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text(
                 'Scan your Face to authenticate! ',
                 style: TextStyle(

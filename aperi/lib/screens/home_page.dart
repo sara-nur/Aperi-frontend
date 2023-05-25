@@ -84,8 +84,7 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const FingerPrintID()),
+                      MaterialPageRoute(builder: (context) => FingerPrintID()),
                     );
                   },
                   icon: const Icon(Icons.fingerprint),
@@ -103,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Email()),
+                    MaterialPageRoute(builder: (context) => const Email()),
                   );
                 },
                 icon: const Icon(Icons.numbers),

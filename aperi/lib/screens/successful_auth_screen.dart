@@ -48,11 +48,14 @@ class _SuccessfulAuthState extends State<SuccessfulAuth> {
             ],
           ),
         ),
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'You have successfully authenticated! The doors will now open for you :)',
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ],
         ),

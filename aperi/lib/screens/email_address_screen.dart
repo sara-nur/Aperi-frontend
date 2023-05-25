@@ -4,7 +4,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:aperi/widgets/ButtonWidget.dart';
 
 class Email extends StatefulWidget {
-  Email({Key? key}) : super(key: key);
+  const Email({Key? key}) : super(key: key);
 
   @override
   State<Email> createState() => _EmailState();
