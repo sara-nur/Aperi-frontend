@@ -1,5 +1,6 @@
-import 'package:aperi/screens/home_page.dart';
 import 'package:flutter/material.dart';
+import 'home_page.dart';
+import 'package:confetti/confetti.dart';
 
 class SuccessfulAuth extends StatefulWidget {
   const SuccessfulAuth({super.key});
@@ -9,10 +10,15 @@ class SuccessfulAuth extends StatefulWidget {
 }
 
 class _SuccessfulAuthState extends State<SuccessfulAuth> {
+  final ConfettiController _confettiController =
+      ConfettiController(duration: const Duration(seconds: 6));
+
   @override
   void initState() {
+    super.initState();
+    _confettiController.play();
     Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 6),
       () {
         Navigator.push(
           context,
@@ -22,6 +28,12 @@ class _SuccessfulAuthState extends State<SuccessfulAuth> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose();
+    super.dispose();
   }
 
   @override
@@ -36,29 +48,61 @@ class _SuccessfulAuthState extends State<SuccessfulAuth> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color.fromARGB(255, 229, 99, 90),
-              Color.fromARGB(255, 14, 131, 227),
-              Color.fromARGB(224, 197, 138, 212),
-            ],
-          ),
-        ),
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'You have successfully authenticated! The doors will now open for you :)',
-              style: TextStyle(
-                color: Colors.white,
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(255, 229, 99, 90),
+                  Color.fromARGB(255, 14, 131, 227),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: ConfettiWidget(
+              confettiController: _confettiController,
+              blastDirectionality: BlastDirectionality.explosive,
+              shouldLoop: false,
+              colors: const [
+                Colors.red,
+                Colors.blue,
+                Colors.yellow,
+                Colors.green,
+              ],
+            ),
+          ),
+          const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Successfull authentification! ',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 19,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'The doors will now open for you :)',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

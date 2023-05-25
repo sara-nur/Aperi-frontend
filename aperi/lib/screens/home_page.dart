@@ -1,3 +1,4 @@
+import 'package:aperi/screens/successful_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aperi/screens/face_id_screen.dart';
 import 'package:aperi/screens/fingerprint_id_screen.dart';
@@ -84,7 +85,8 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FingerPrintID()),
+                      MaterialPageRoute(
+                          builder: (context) => const FingerPrintID()),
                     );
                   },
                   icon: const Icon(Icons.fingerprint),

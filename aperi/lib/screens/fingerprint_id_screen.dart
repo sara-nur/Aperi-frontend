@@ -2,11 +2,10 @@ import 'package:aperi/screens/successful_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aperi/services/local_auth_custom.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart';
 import 'dart:convert';
 
 class FingerPrintID extends StatefulWidget {
-  FingerPrintID({super.key});
+  const FingerPrintID({super.key});
 
   Future<dynamic> postFingerprintAuth() async {
     final body = jsonEncode({'isAuthorized': true});
