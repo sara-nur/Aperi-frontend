@@ -252,7 +252,7 @@ class _CodeIDState extends State<CodeID> {
                       fixedSize: const Size(100, 30),
                       backgroundColor: const Color.fromARGB(90, 234, 230, 240),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       String concatenatedCode = pin1Controller.text +
                           pin2Controller.text +
                           pin3Controller.text +
@@ -264,7 +264,8 @@ class _CodeIDState extends State<CodeID> {
                       );
 
                       if (localCode == widget.apiCode) {
-                        widget.postCodeAuth();
+                        await widget.postCodeAuth();
+                        // ignore: use_build_context_synchronously
                         Navigator.push(
                           context,
                           MaterialPageRoute(

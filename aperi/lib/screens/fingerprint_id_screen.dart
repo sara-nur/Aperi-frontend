@@ -58,7 +58,7 @@ class _FingerPrintIDState extends State<FingerPrintID> {
                     authenticate = authenticate;
                   });
                   if (authenticate == true) {
-                    widget.postFingerprintAuth();
+                    await widget.postFingerprintAuth();
                     // ignore: use_build_context_synchronously
                     Navigator.push(
                       context,
