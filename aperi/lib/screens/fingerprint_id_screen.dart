@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class FingerPrintID extends StatefulWidget {
-  const FingerPrintID({super.key});
+  const FingerPrintID({Key? key});
 
   Future<dynamic> postFingerprintAuth() async {
     final body = jsonEncode({'isAuthorized': true});
@@ -13,9 +13,8 @@ class FingerPrintID extends StatefulWidget {
       'accept': '*/*',
       'Content-Type': 'application/json',
     };
-
     var response = await http.post(
-      Uri.parse('http://192.168.1.82:7004/api/fingerprint-auth'),
+      Uri.parse('http://192.168.0.66:7004/api/fingerprint-auth'),
       headers: headers,
       body: body,
     );
@@ -27,6 +26,36 @@ class FingerPrintID extends StatefulWidget {
 
 class _FingerPrintIDState extends State<FingerPrintID> {
   bool authenticate = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      const Duration(microseconds: 10),
+      () {
+        userAuthenticate();
+      },
+    );
+  }
+
+  void userAuthenticate() async {
+    var authResult = await LocalAuthCustom.authenticateFingerprint();
+    setState(() {
+      authenticate = authResult;
+      widget.postFingerprintAuth();
+    });
+    if (authResult == true) {
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              const SuccessfulAuth(), // Remove 'const' keyword here
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,31 +75,10 @@ class _FingerPrintIDState extends State<FingerPrintID> {
             ],
           ),
         ),
-        child: Center(
+        child: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  var authenticate =
-                      await LocalAuthCustom.authenticateFingerprint();
-                  setState(() {
-                    authenticate = authenticate;
-                  });
-                  if (authenticate == true) {
-                    await widget.postFingerprintAuth();
-                    // ignore: use_build_context_synchronously
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SuccessfulAuth(),
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Scan your fingerprint'),
-              ),
-            ],
+            children: [],
           ),
         ),
       ),

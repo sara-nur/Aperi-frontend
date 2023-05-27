@@ -15,7 +15,7 @@ class FaceID extends StatefulWidget {
     };
 
     var response = await http.post(
-      Uri.parse('http://192.168.1.82:7004/api/face-id-auth'),
+      Uri.parse('http://192.168.0.66:7004/api/face-id-auth'),
       headers: headers,
       body: body,
     );
@@ -27,6 +27,34 @@ class FaceID extends StatefulWidget {
 
 class _FaceIDState extends State<FaceID> {
   bool authenticate = false;
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      const Duration(microseconds: 10),
+      () {
+        userAuthenticate();
+      },
+    );
+  }
+
+  void userAuthenticate() async {
+    var authResult = await LocalAuthCustom.authenticateFaceID(context);
+    setState(() {
+      authenticate = authResult;
+      widget.postFaceIDauth();
+    });
+    if (authResult == true) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              const SuccessfulAuth(), // Remove 'const' keyword here
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,32 +77,6 @@ class _FaceIDState extends State<FaceID> {
               Color.fromARGB(255, 229, 99, 90),
               Color.fromARGB(255, 14, 131, 227),
               Color.fromARGB(224, 197, 138, 212),
-            ],
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  authenticate = await LocalAuthCustom.authenticateFaceID();
-                  setState(() {
-                    authenticate = authenticate;
-                  });
-                  if (authenticate == true) {
-                    widget.postFaceIDauth();
-                    // ignore: use_build_context_synchronously
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SuccessfulAuth(),
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Scan your Face'),
-              ),
             ],
           ),
         ),

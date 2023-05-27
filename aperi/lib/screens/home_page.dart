@@ -1,4 +1,3 @@
-import 'package:aperi/screens/successful_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aperi/screens/face_id_screen.dart';
 import 'package:aperi/screens/fingerprint_id_screen.dart';
