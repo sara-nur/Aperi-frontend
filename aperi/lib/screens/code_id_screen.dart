@@ -22,7 +22,7 @@ class CodeID extends StatefulWidget {
     };
 
     var response = await http.post(
-      Uri.parse('http://192.168.0.66:7004/api/code-auth'),
+      Uri.parse('http://192.168.1.161:7004/api/code-auth'),
       headers: headers,
       body: body,
     );
@@ -37,7 +37,7 @@ class CodeID extends StatefulWidget {
     };
     final response = await http.post(
       Uri.parse(
-          'http://192.168.0.66:7004/api/get-code'), //TODO: ssl certificate validation
+          'http://192.168.1.161:7004/api/get-code'), //TODO: ssl certificate validation
       headers: headers,
       body: body,
     );

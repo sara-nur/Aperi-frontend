@@ -7,7 +7,7 @@ class LocalAuthCustom {
   static Future<bool> _canAuthenticate() async =>
       await auth.canCheckBiometrics || await auth.isDeviceSupported();
 
-  static Future<bool> authenticateFingerprint() async {
+  static Future<bool> authenticateBiometrics() async {
     try {
       if (!await _canAuthenticate()) return false;
 

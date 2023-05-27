@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:aperi/screens/face_id_screen.dart';
-import 'package:aperi/screens/fingerprint_id_screen.dart';
+import 'package:aperi/screens/biometrics.dart';
 import 'package:aperi/screens/email_address_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -53,24 +52,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  fixedSize: const Size(200, 50),
-                  backgroundColor: const Color.fromARGB(90, 194, 185, 204),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const FaceID()),
-                  );
-                },
-                icon: const Icon(Icons.tag_faces_sharp),
-                label: const Text('Face ID'),
-              ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
@@ -85,11 +66,11 @@ class HomeScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const FingerPrintID()),
+                          builder: (context) => const Biometrics()),
                     );
                   },
                   icon: const Icon(Icons.fingerprint),
-                  label: (const Text('Finger Print ID'))),
+                  label: (const Text('Biometrics'))),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(

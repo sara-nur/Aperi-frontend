@@ -4,27 +4,27 @@ import 'package:aperi/services/local_auth_custom.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class FingerPrintID extends StatefulWidget {
-  const FingerPrintID({Key? key});
+class Biometrics extends StatefulWidget {
+  const Biometrics({Key? key});
 
-  Future<dynamic> postFingerprintAuth() async {
+  Future<dynamic> postBiometricsAuth() async {
     final body = jsonEncode({'isAuthorized': true});
     final headers = {
       'accept': '*/*',
       'Content-Type': 'application/json',
     };
     var response = await http.post(
-      Uri.parse('http://192.168.0.66:7004/api/fingerprint-auth'),
+      Uri.parse('http://192.168.1.161:7004/api/biometrics-auth'),
       headers: headers,
       body: body,
     );
   }
 
   @override
-  State<FingerPrintID> createState() => _FingerPrintIDState();
+  State<Biometrics> createState() => _BiometricsState();
 }
 
-class _FingerPrintIDState extends State<FingerPrintID> {
+class _BiometricsState extends State<Biometrics> {
   bool authenticate = false;
 
   @override
@@ -39,10 +39,10 @@ class _FingerPrintIDState extends State<FingerPrintID> {
   }
 
   void userAuthenticate() async {
-    var authResult = await LocalAuthCustom.authenticateFingerprint();
+    var authResult = await LocalAuthCustom.authenticateBiometrics();
     setState(() {
       authenticate = authResult;
-      widget.postFingerprintAuth();
+      widget.postBiometricsAuth();
     });
     if (authResult == true) {
       // ignore: use_build_context_synchronously
@@ -73,12 +73,6 @@ class _FingerPrintIDState extends State<FingerPrintID> {
               Color.fromARGB(255, 14, 131, 227),
               Color.fromARGB(224, 197, 138, 212),
             ],
-          ),
-        ),
-        child: const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [],
           ),
         ),
       ),
