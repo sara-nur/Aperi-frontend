@@ -60,7 +60,7 @@ class _BiometricsState extends State<Biometrics> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Finger Print ID'),
+        title: const Text('Biometrics'),
         centerTitle: true,
       ),
       body: Container(
