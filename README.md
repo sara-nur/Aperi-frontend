@@ -8,9 +8,14 @@ No more lost keys or forgotten passwords, our system makes security simple and c
 
 Don't compromise on security, upgrade to our two-factor authentication system today and enjoy peace of mind knowing your space is protected by the latest technology.
 
+
+In the video below, we provide a comprehensive explanation of our product/service and demonstrate its key features and benefits. We walk you through each step, highlighting how our solution addresses specific challenges and delivers valuable results. By watching the video, you will gain a deeper understanding of how our product/service works and how it can benefit you or your organization.
+
 <br>
 
-Please click on the photo to explore our demonstration and detailed explanation.
+Feel free to click on the video and enjoy the demonstration :)
+
+
 [![Aperi demonstration](https://img.youtube.com/vi/eUh51i1CUBY/0.jpg)](https://www.youtube.com/watch?v=eUh51i1CUBY)
 
 
